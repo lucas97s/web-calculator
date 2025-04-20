@@ -36,6 +36,7 @@ function operation (firstNumber,secondNumber, operator) {
 
 const calcBlock = document.querySelector(".cal-body") ; 
 const answer = document.querySelector(".answer") ; 
+const numberDisplay = document.querySelector(".numbers-display")
 
 
 
@@ -46,12 +47,13 @@ console.log(operatorsNode) ;
 
 operatorsNode.forEach(button => {
     button.addEventListener('click', function(element){
-        index = 2 ; 
-        if (index == 2 ) { 
+ 
+        if ( !(firstNumber === '') && operator == 0  ) { 
             operator = element.target.textContent ;
             console.log(operator) ; 
-            index = 3 ;
             console.log(index) ;  
+            index = 2 ; 
+            numberDisplay.textContent = firstNumber + ' ' + operator ;
         }
         
     })
@@ -66,13 +68,18 @@ console.log(numberNodes) ;
 
 numberNodes.forEach(button => {
     button.addEventListener('click', function(element){
-        if (index == 1 ) {
+
+        if (index == 1){
             firstNumber = firstNumber + element.target.textContent ; 
             console.log (firstNumber) ;
-            index = 2 ; 
-        } else if (index == 3) {
+            numberDisplay.textContent = firstNumber ;
+        }
+    
+
+        if (index == 2) {
             secondNumber = secondNumber + element.target.textContent ; 
-            index = 4 ; 
+            console.log(secondNumber) ; 
+            numberDisplay.textContent = firstNumber + ' ' + operator + ' ' + secondNumber ;  
         }
     })
 });
@@ -85,14 +92,17 @@ console.log(otherNodes) ;
 
 otherNodes.forEach(button => {
     button.addEventListener('click', function(element){
-        index = 4 ; 
         firstNumber = parseFloat(firstNumber) ; 
-        secondNumber = parseFloat(secondNumber) ;    clearOrFloat = element.target.textContent ;
-        if (index == 4 && clearOrFloat == "=") {
+        secondNumber = parseFloat(secondNumber) ;    
+        clearOrFloat = element.target.textContent ;
+        if (!(secondNumber === '') && clearOrFloat == "=") {
             firstNumber = operation(firstNumber,secondNumber,operator) ; 
             console.log(firstNumber) ;
             answer.textContent = firstNumber ; 
-            index = 2 ; 
+            secondNumber = ''   ; 
+            operator = '' ; 
+            numberDisplay.textContent = firstNumber 
+
         }
 
     })
