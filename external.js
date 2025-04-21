@@ -87,7 +87,7 @@ operatorsNode.forEach(button => {
             
  
             if ( !(firstNumber === '') && operator == 0  ) { 
-                operator = elementCheck ;
+                operator = element.target.textContent;
                 console.log(operator) ; 
                 console.log(index) ;  
                 index = 2 ; 
